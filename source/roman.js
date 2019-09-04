@@ -1,6 +1,6 @@
 'use strict';
 
-const asRoman = function(value) {
+const asRoman = value => {
     const lookup = [
         ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'XI'],
         ['X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC'],
@@ -13,7 +13,7 @@ const asRoman = function(value) {
     }, "");
 }
 
-const asDecimal = function(value) {
+const asDecimal = value => {
     const romanToDecimal = {
         'i': 1,
         'v': 5,
@@ -35,12 +35,12 @@ const asDecimal = function(value) {
     }, 0);
 }
 
-const roman = function(value) {
+const roman = value => {
     if(typeof(value) == 'number') {
         if(value <= 0) {
             throw RangeError('Only positive numbers allowed');
         }
-        
+
         value = value.toString();
     }
 
