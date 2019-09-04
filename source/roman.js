@@ -7,6 +7,7 @@ const asRoman = function(value) {
         ['C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'CM'],
         ['M', 'MM', 'MMM']
     ];
+
     return value.split('').reverse().map(numeral => parseInt(numeral)).reduce((result, curr, index, digits) => {
         return curr > 0 ? lookup[index][curr - 1] + result : result;
     }, "");
@@ -27,7 +28,9 @@ const asDecimal = function(value) {
         if(curr === undefined) {
             throw RangeError('Unexpected roman numeral');
         }
+
         var prev = index > 0 ? digits[index - 1] : 0;
+        
         return prev < curr ? result + curr - 2 * prev : result + curr;
     }, 0);
 }
@@ -37,6 +40,7 @@ const roman = function(value) {
         if(value <= 0) {
             throw RangeError('Only positive numbers allowed');
         }
+        
         value = value.toString();
     }
 
