@@ -22,7 +22,7 @@ const asDecimal = value => {
         'c': 100,
         'd': 500,
         'm': 1000
-    }
+    };
 
     return value.toLowerCase().split('').map(num => romanToDecimal[num]).reduce((result, curr, index, digits) => {
         if(curr === undefined) {
