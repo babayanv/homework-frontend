@@ -1,6 +1,5 @@
 'use strict';
 
-
 const asRoman = function(value) {
     const lookup = [
         ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'XI'],
@@ -12,7 +11,6 @@ const asRoman = function(value) {
         return curr > 0 ? lookup[index][curr - 1] + result : result;
     }, "");
 }
-
 
 const asDecimal = function(value) {
     const romanToDecimal = {
@@ -33,7 +31,6 @@ const asDecimal = function(value) {
         return prev < curr ? result + curr - 2 * prev : result + curr;
     }, 0);
 }
-
 
 const roman = function(value) {
     if(typeof(value) == 'number') {
