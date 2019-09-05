@@ -8,7 +8,7 @@ const asRoman = value => {
         ['M', 'MM', 'MMM']
     ];
 
-    return value.split('').reverse().map(numeral => parseInt(numeral)).reduce((result, curr, index, digits) => {
+    return value.split('').reverse().map(numeral => parseInt(numeral)).reduce((result, curr, index) => {
         return curr > 0 ? lookup[index][curr - 1] + result : result;
     }, "");
 }
@@ -25,24 +25,24 @@ const asDecimal = value => {
     };
 
     return value.toLowerCase().split('').map(num => romanToDecimal[num]).reduce((result, curr, index, digits) => {
-        if(curr === undefined) {
+        if(!curr) {
             throw RangeError('Unexpected roman numeral');
         }
 
-        var prev = index > 0 ? digits[index - 1] : 0;
+        const prev = index > 0 ? digits[index - 1] : 0;
         
         return prev < curr ? result + curr - 2 * prev : result + curr;
     }, 0);
 }
 
 const roman = value => {
-    if(typeof(value) == 'number') {
-        if(value <= 0) {
-            throw RangeError('Only positive numbers allowed');
-        }
-
-        value = value.toString();
+    if(isNaN(value)) {
+        return asDecimal(value);
     }
 
-    return isNaN(value) ? asDecimal(value) : asRoman(value);
+    if(value <= 0) {
+        throw RangeError('Only positive numbers allowed');
+    }
+
+    return asRoman(value.toString());
 }
