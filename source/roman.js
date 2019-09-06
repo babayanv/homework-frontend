@@ -1,7 +1,7 @@
 'use strict';
 
-const asRoman = value => {
-    const lookup = [
+const decimalToRoman = value => {
+    const romanDigits = [
         ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'XI'],
         ['X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC'],
         ['C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'CM'],
@@ -9,11 +9,11 @@ const asRoman = value => {
     ];
 
     return value.split('').reverse().map(numeral => parseInt(numeral)).reduce((result, curr, index) => {
-        return curr > 0 ? lookup[index][curr - 1] + result : result;
+        return curr > 0 ? romanDigits[index][curr - 1] + result : result;
     }, "");
 }
 
-const asDecimal = value => {
+const romanToDecimal = value => {
     const romanToDecimal = {
         'i': 1,
         'v': 5,
@@ -36,13 +36,17 @@ const asDecimal = value => {
 }
 
 const roman = value => {
+    if(typeof value !== 'string' && typeof value !== 'number') {
+        throw TypeError('Invalid argument');
+    }
+
     if(isNaN(value)) {
-        return asDecimal(value);
+        return romanToDecimal(value);
     }
 
     if(value <= 0) {
         throw RangeError('Only positive numbers allowed');
     }
 
-    return asRoman(value.toString());
+    return decimalToRoman(value.toString());
 }
