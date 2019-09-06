@@ -14,7 +14,7 @@ const decimalToRoman = value => {
 }
 
 const romanToDecimal = value => {
-    const romanToDecimal = {
+    const romanDigits = {
         'i': 1,
         'v': 5,
         'x': 10,
@@ -24,7 +24,7 @@ const romanToDecimal = value => {
         'm': 1000
     };
 
-    return value.toLowerCase().split('').map(num => romanToDecimal[num]).reduce((result, curr, index, digits) => {
+    return value.toLowerCase().split('').map(num => romanDigits[num]).reduce((result, curr, index, digits) => {
         if(!curr) {
             throw RangeError('Unexpected roman numeral');
         }
